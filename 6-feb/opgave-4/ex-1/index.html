@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex-1</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    #app{
+        background-color: beige;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(30%, 1fr));
+        align-items: center;
+        gap: 1rem;
+ 
+    }
+    #app div {
+        width: 80%;
+        display: inline-block;
+        height: 100%;
+        background-color: green;
+        margin: 1rem;
+        border-radius: 50%;
+    }
+    #app div:hover {
+        opacity: 0;
+    }
+</style>
+<body>
+    <div id="app">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
+

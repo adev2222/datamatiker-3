@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex-3 Timer</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #app {
+        background-color: beige;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    #timer {
+        font-size: 2rem;
+        line-height: 2rem;
+        width: 200px;
+        height: 200px;
+        background-color: #0781D4;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    input {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.8rem;
+        border: none;
+        border-color: #0781D4;
+        background-color: #0781D4;
+        color: black;
+        display: none;
+        outline: none;
+    }
+
+    input:focus {
+        vertical-align: middle;
+    }
+
+    #start {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #0781D4;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #start:hover {
+        background-color: #045f9b;
+    }
+
+    #start:active {
+        background-color: #022f4d;
+        transform: translateY(2px);
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input::placeholder {
+        color: black;
+        font-size: 1rem;
+        opacity: 1;
+    }
+
+    input:focus {
+        border-color: #ff0000;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div id="timer">
+            <input id="minInput" type="text" />
+            <div id="min">00</div>: <div id="sec">00</div>
+            <input id="secInput" type="text"  />
+        </div>
+    </div>
+
+    <script>
+        const minInput = document.getElementById('minInput');
+        const secInput = document.getElementById('secInput');
+        const min = document.getElementById('min');
+        const sec = document.getElementById('sec');
+
+        min.addEventListener('click', () => {
+            minInput.style.display = 'block';
+            min.style.display = 'none';
+            minInput.focus();
+        });
+        minInput.addEventListener('focusout', () => {
+            minInput.style.display = 'none';
+            min.style.display = 'block';
+            min.innerText = minInput.value;
+        });
+
+        sec.addEventListener('click', () => {
+            secInput.style.display = 'block';
+            sec.style.display = 'none';
+            secInput.focus();
+        });
+        secInput.addEventListener('focusout', () => {
+            secInput.style.display = 'none';
+            sec.style.display = 'block';
+            sec.innerText = secInput.value || '00';
+        });
+
+        let timerInterval;
+
+        function startFunc() {
+            let time = 0;
+            let end = (parseInt(minInput.value * 60) || 0) + (parseInt(secInput.value) || 0) || 60;
+            console.log(end);
+            timerInterval = setInterval(() => {
+                if (time < end) {
+                    let minutes = Math.floor(time / 60);
+                    let seconds = time % 60;
+                    min.innerText = `${minutes < 10 ? `0${minutes}` : minutes}`;
+                    sec.innerText = `${seconds < 10 ? '0' : ''}${seconds}`;
+                    time++;
+                } else {
+                    clearInterval(timerInterval);
+                    alert('Timer finished!');
+                }
+            }, 1000);
+        }
+
+
+        // Listen for Enter key press
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                clearInterval(timerInterval); // In case a timer is already running we clear it
+                startFunc();
+            }
+        });
+    </script>
+</body>
+
+</html>

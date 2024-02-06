@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex-3 Timer</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #app {
+        background-color: beige;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    #timer {
+        font-size: 2rem;
+        line-height: 2rem;
+        width: 200px;
+        height: 200px;
+        background-color: #0781D4;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    }
+    input {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+    }
+
+    #start {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #0781D4;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #start:hover {
+        background-color: #045f9b;
+    }
+
+    #start:active {
+        background-color: #022f4d;
+        transform: translateY(2px);
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div>
+            <input type="number" placeholder="Enter minutes">
+            <button onclick="startFunc()" id="start">Start</button>
+        </div>
+
+        <div id="timer">
+            00:00
+        </div>
+    </div>
+
+    <script>
+        const timer = document.getElementById('timer');
+        const input = document.querySelector('input');
+        const start = document.getElementById('start');
+
+        function startFunc() {
+            let time = 50; // set initial time to 0
+            let end = input.value * 60; // convert minutes to seconds
+            let interval = setInterval(() => {
+                if (time <= end) {
+                    let minutes = Math.floor(time / 60);
+                    let seconds = time % 60;
+                    timer.textContent = `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    time++;
+                } else {
+
+                    timer.style.backgroundColor = 'red';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>
